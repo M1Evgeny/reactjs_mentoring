@@ -5,7 +5,7 @@ function App() {
   return (
     <>
     <div>Ahoy!</div>
-    <div id='blue'>devMode - {process.env.MODE}</div>
+    <div id='blue'>devMode - {process.env.NODE_ENV}</div>
     </>
   );
 }

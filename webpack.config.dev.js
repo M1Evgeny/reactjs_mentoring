@@ -1,7 +1,6 @@
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { DefinePlugin } = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -24,9 +23,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
         template: "./public/index.html"
-    }),
-    new DefinePlugin({
-      'process.env.MODE': JSON.stringify(process.env.MODE),
     })
   ],
   module: {

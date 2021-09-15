@@ -3,9 +3,10 @@ import './App.css';
 
 function App() {
   return (
-    <div>
-      Ahoy!
-    </div>
+    <>
+    <div>Ahoy!</div>
+    <div id='blue'>devMode - {process.env.MODE}</div>
+    </>
   );
 }
 

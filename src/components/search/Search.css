@@ -1,0 +1,37 @@
+.findmovie {
+    height: 49px;
+    width: 393px;
+    color: #FFFFFF;
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 49px;
+    margin: 100px 0 30px 0;
+  }
+  
+  .searchButton {
+    height: 57px;
+    width: 233px;
+    border-radius: 4px;
+    background-color: #F65261;
+    color: #FFFFFF;
+    font-weight: 500;
+    line-height:24px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  .searchField {
+    height: 57px;
+    width: 713px;
+    opacity: 0.7;
+    border: 0;
+    border-radius: 4px;
+    background-color: rgba(50,50,50,0.8);
+    color: #FFFFFF;
+    font-family: Montserrat;
+    font-size: 20px;
+    line-height: 24px;
+    margin-right: 10px;
+    padding-left: 15px;
+  }

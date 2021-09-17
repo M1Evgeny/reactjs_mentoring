@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from '../../components/Header';
+import Header from '../../components/header';
 import Logo from '../../components/logo';
 import Search from '../../components/search';
 import AddMovieButton from '../../components/add-movie-button';
 import Main from '../../components/main';
-import Filter from '../../components/filter';
+import MovieListContainer from '../../components/movie-list-container';
 import Footer from '../../components/footer';
 
 const HomePage = () => {
@@ -16,7 +16,7 @@ const HomePage = () => {
                 <AddMovieButton />
             </Header>
             <Main>
-                <Filter />
+                <MovieListContainer/>
             </Main>
             <Footer>
                 <Logo styleName='footer-logo'/>

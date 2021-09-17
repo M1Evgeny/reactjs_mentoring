@@ -3,7 +3,7 @@
 ## Installation
 1. Install npm and nodejs: https://nodejs.org/en/
 2. Run ``` npm install ```
-3. Run ``` npm start ```
+3. Run ``` npm run dev```
 4. Open http://localhost:3000
 
 ## Available Scripts

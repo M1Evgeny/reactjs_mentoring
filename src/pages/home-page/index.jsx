@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../../components/header';
+import Container from '../../components/container';
 import Logo from '../../components/logo';
 import Search from '../../components/search';
 import AddMovieButton from '../../components/add-movie-button';
@@ -11,9 +12,11 @@ const HomePage = () => {
     return (
         <React.Fragment>
             <Header>
-                <Logo styleName='header-logo'/>
+                <Container>
+                    <Logo styleName='header-logo'/>
+                    <AddMovieButton />
+                </Container>
                 <Search />
-                <AddMovieButton />
             </Header>
             <Main>
                 <MovieListContainer/>

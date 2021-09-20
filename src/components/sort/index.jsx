@@ -5,7 +5,7 @@ const Sort = ({setSortParam}) => {
     return (
         <div className="sort">
             <label className="sortBy">
-                Sort by
+                <span className="select-label">Sort by</span>
                 <select onClick={(e) => setSortParam(e.target.value)} >
                     <option defaultValue value="release-date">Release Date</option>
                     <option value="vote_average">Rating</option>

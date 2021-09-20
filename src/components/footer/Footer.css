@@ -1,8 +1,8 @@
 .footer {
-    position: absolute;
     width: 1200px;
     height: 70px;
-    left: 58px;
-    top: 1771px;
     background: #424242;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

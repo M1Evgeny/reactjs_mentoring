@@ -1,7 +1,7 @@
 .main {
-    position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 1200px;
-    height: 1717px;
-    left: 58px;
-    top: 405px;
+    background: #232323;
+    color: #FFFFFF;
 }

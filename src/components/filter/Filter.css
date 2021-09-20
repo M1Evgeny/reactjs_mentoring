@@ -20,3 +20,9 @@
   li {
     list-style-type: none;
   }
+
+  .active-item {
+    border-bottom-width: 2px;
+    border-color: #F65261;
+    border-bottom-style: solid;
+  }

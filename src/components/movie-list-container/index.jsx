@@ -40,20 +40,15 @@ class MovieListContainer extends React.Component {
 
   render() {
     const foundMovies = this.sortMovies(this.filterMovies());
+    const movieListMakrUp =() => <><SubTitle movieListLength = {foundMovies.length} /><MovieList movies={foundMovies} /></>;
     return (
       <React.Fragment>
         <Nav>
           <Filter filterMovies={this.filterByGenre} />
           <Sort setSortParam={this.setSortParam} />
         </Nav>
-        
         {
-            foundMovies.length !== 0 ? 
-            <React.Fragment>
-              <SubTitle movieListLength = {foundMovies.length} />
-              <MovieList movies={foundMovies} />
-            </React.Fragment>
-             : <EmptyComponent />
+            foundMovies.length !== 0 ? movieListMakrUp() : <EmptyComponent />
         }
       </React.Fragment>
     );

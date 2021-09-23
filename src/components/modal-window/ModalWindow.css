@@ -1,0 +1,201 @@
+.modal-background {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(10, 10, 10, 0.86);
+    width: 1200px;
+    z-index: 1;
+}
+
+.modal-card {
+    margin: 0 auto;
+    display: block;
+    margin-top: 250px;
+    width: 976px;
+    height: 917px;
+    background: #232323;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.07), 0px 10px 20px rgba(0, 0, 0, 0.05), 0px 10px 50px rgba(0, 0, 0, 0.05);
+}
+
+.modal__close {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background: #232323;
+}
+
+.close {
+    background: #232323;
+    color: white;
+    margin: 32px 32px 0 0;
+    border: none;
+    font-size: 28px;
+}
+
+.modal-title {
+    margin-top: 0;
+    margin-left: 60px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 49px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-fieldset {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    justify-content: space-between;
+    margin: 0 52px 20px 45px;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 60px;
+}
+
+.modal-submit {
+    background: #F65261;
+    border-radius: 4px;
+    width: 180px;
+    height: 57px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+.modal-reset {
+    background: #232323;
+    margin-right: 15px;
+    border: 1.5px solid #F65261;
+    box-sizing: border-box;
+    width: 180px;
+    height: 57px;
+    border-radius: 4px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #F65261;
+}
+
+.modal-label {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.888889px;
+    text-transform: uppercase;
+    color: #F65261;
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-label input {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 20px;
+    letter-spacing: 0.888889px;
+    color: white;
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    background: rgba(50, 50, 50, 0.948044);
+    border: none;
+    margin-top: 15px;
+    width: 500px;
+    height: 57px;
+}
+
+.modal-label-second {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.888889px;
+    text-transform: uppercase;
+    color: #F65261;
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.modal-label-second input {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 20px;
+    letter-spacing: 0.888889px;
+    color: white;
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    background: rgba(50, 50, 50, 0.948044);
+    border: none;
+    margin-top: 15px;
+    width: 301px;
+    height: 57px;
+}
+
+.overview-input {
+    width: 859px !important;
+    height: 197px !important;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 20px;
+    letter-spacing: 0.888889px;
+    color: white;
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    background: rgba(50, 50, 50, 0.948044);
+    border: none;
+    margin-top: 15px;
+}
+
+.modal-label select, option {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 20px;
+    letter-spacing: 0.888889px;
+    color: #F65261;
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    background: rgba(50, 50, 50, 0.948044) !important;
+    border: none;
+    margin: 15px 0 0 0 !important;
+    width: 500px;
+    height: 57px;
+}

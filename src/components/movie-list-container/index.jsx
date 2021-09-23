@@ -38,6 +38,11 @@ class MovieListContainer extends React.Component {
     return movies.sort((a, b) => b[this.state.sortParam] - a[this.state.sortParam]);
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    return nextState !== this.state;
+
+  }
+
   render() {
     const foundMovies = this.sortMovies(this.filterMovies());
     const movieListMakrUp =() => <><SubTitle movieListLength = {foundMovies.length} /><MovieList movies={foundMovies} /></>;

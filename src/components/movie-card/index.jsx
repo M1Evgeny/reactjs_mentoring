@@ -60,9 +60,8 @@ class MovieCard extends React.Component {
                 <div className={styles.hamburger_menu}>
                     <input id={`menu__toggle${this.props.id}`} className={styles.menu__toggle} type="checkbox" />
                     <label className={styles.menu__btn} htmlFor={`menu__toggle${this.props.id}`}>
-                    <span></span>
+                        <span></span>
                     </label>
-
                     <ul className={styles.menu__box}>
                         <li><a id="edit-button" className={styles.menu__item} href="#" onClick={(e) => this.handleModalOpen(e)} >Edit</a></li>
                         <li><a id="delete-button" className={styles.menu__item} href="#" onClick={(e) => this.handleModalOpen(e)} >Delete</a></li>

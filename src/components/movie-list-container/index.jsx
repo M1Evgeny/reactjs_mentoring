@@ -11,16 +11,16 @@ import EmptyComponent from '../empty-component';
 class MovieListContainer extends React.Component {
   constructor() {
     super();
-    this.state = { genre: 'all', sortParam: 'release_date', mockedMovies: stubs };
+    this.state = { genre: 'all', sortParam: 'release_date', mockedMovies: [] };
     this.filterMovies = this.filterMovies.bind(this);
     this.filterByGenre = this.filterByGenre.bind(this);
     this.setSortParam = this.setSortParam.bind(this);
     this.sortMovies = this.sortMovies.bind(this);
   }
 
-  filterMovies() {
-    if (this.state.genre === 'all') return this.state.mockedMovies;
-    return this.state.mockedMovies.filter((movie) => movie.genres.includes(this.state.genre));
+  filterMovies(movies) {
+    if (this.state.genre === 'all') return movies;
+    return movies.filter((movie) => movie.genres.includes(this.state.genre));
   }
 
   filterByGenre(genre) {
@@ -32,19 +32,20 @@ class MovieListContainer extends React.Component {
   }
 
   sortMovies(movies) {
+    let copyOfMovies = movies.slice();
     if (this.state.sortParam === 'release_date') {
-      return movies.sort((a, b) => new Date(b[this.state.sortParam]) - new Date(a[this.state.sortParam]));
+      return copyOfMovies.sort((a, b) => new Date(b[this.state.sortParam]) - new Date(a[this.state.sortParam]));
     }
-    return movies.sort((a, b) => b[this.state.sortParam] - a[this.state.sortParam]);
+      return copyOfMovies.sort((a, b) => b[this.state.sortParam] > a[this.state.sortParam] ? 1 : -1);
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    return nextState !== this.state;
-
+  componentDidMount() {
+    this.setState({ mockedMovies: stubs });
   }
 
   render() {
-    const foundMovies = this.sortMovies(this.filterMovies());
+    const foundMovies = this.sortMovies(this.filterMovies(this.state.mockedMovies));
+    console.log(foundMovies);
     const movieListMakrUp =() => <><SubTitle movieListLength = {foundMovies.length} /><MovieList movies={foundMovies} /></>;
     return (
       <React.Fragment>
@@ -53,7 +54,7 @@ class MovieListContainer extends React.Component {
           <Sort setSortParam={this.setSortParam} />
         </Nav>
         {
-            foundMovies.length !== 0 ? movieListMakrUp() : <EmptyComponent />
+          foundMovies.length !== 0 ? movieListMakrUp() : <EmptyComponent />
         }
       </React.Fragment>
     );

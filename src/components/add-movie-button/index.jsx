@@ -10,6 +10,7 @@ class AddMovieButton extends React.Component {
             modalHeight: 0
         };
         this.handleModalClose = this.handleModalClose.bind(this);
+        this.handleModalCloseAfterSuccess = this.handleModalCloseAfterSuccess.bind(this);
         this.handleModalOpen = this.handleModalOpen.bind(this);
     }
 
@@ -19,6 +20,8 @@ class AddMovieButton extends React.Component {
             this.setState({showModal: false});
         };
     };
+
+    handleModalCloseAfterSuccess = () => this.setState({showModal: false});
 
     handleModalOpen = () => {
         this.setState({
@@ -34,7 +37,8 @@ class AddMovieButton extends React.Component {
             <button type="button" className="addMovie" onClick={() => this.handleModalOpen()}>
                 + add movie 
             </button>
-            <ModalWindow show={this.state.showModal} handleModalClose= {this.handleModalClose} modalHeight={this.state.modalHeight} modalTitle={'ADD MOVIE'}/>
+            <ModalWindow show={this.state.showModal} handleModalClose= {this.handleModalClose} modalHeight={this.state.modalHeight} 
+                modalTitle={'ADD MOVIE'} handleModalCloseAfterSuccess= {this.handleModalCloseAfterSuccess} />
         </div>
     )
    }

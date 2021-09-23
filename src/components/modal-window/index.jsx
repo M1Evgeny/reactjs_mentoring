@@ -1,6 +1,7 @@
 import React from 'react';
 import './ModalWindow.css';
 import stubs from '../movie-list-container/mockedMovies.json';
+import SuccessModal from '../success-modal';
 
 class ModalWindow extends React.Component {
     constructor(props) {
@@ -12,10 +13,13 @@ class ModalWindow extends React.Component {
             movieUrl: '',
             rating: '',
             runtime: '',
-            overview: ''
+            overview: '',
+            showAddedMovieModal: false,
+            modalHeight: 0
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleModalClose = this.handleModalClose.bind(this);
     }
 
     componentDidMount(){
@@ -29,7 +33,6 @@ class ModalWindow extends React.Component {
                 runtime: movie.runtime,
                 overview: movie.overview
             });
-            console.log(movie);
         }
     }
 
@@ -45,13 +48,27 @@ class ModalWindow extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        if(this.props.modalTitle === 'ADD MOVIE'){
+            this.props.handleModalCloseAfterSuccess();
+            this.setState({
+                showAddedMovieModal: true,
+                modalHeight: document.body.scrollHeight
+            });
+        }
     }
+
+    handleModalClose = (e) => {
+        const currentClass = e.target.className;
+        if (currentClass === 'modal-background' || currentClass === 'close') {
+            this.setState({showAddedMovieModal: false});
+        };
+    };
     
     
     render(){
         return ( 
-            <div hidden={!this.props.show} >
-                <div className="modal-background" onClick={(e) => this.props.handleModalClose(e)} style={{height: this.props.modalHeight}}>
+            <>
+                <div hidden={!this.props.show} className="modal-background" onClick={(e) => this.props.handleModalClose(e)} style={{height: this.props.modalHeight}}>
                     <div className="modal-card">
                         <div className="modal__close">
                             <button type="button" className="close" title="Close" >X</button>
@@ -104,7 +121,8 @@ class ModalWindow extends React.Component {
                         </form>
                     </div>
                 </div>
-            </div>
+                <SuccessModal show={this.state.showAddedMovieModal} handleModalClose= {this.handleModalClose} modalHeight={this.state.modalHeight} />
+            </>
         )
     }
 }

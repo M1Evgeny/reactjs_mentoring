@@ -3,14 +3,18 @@ import Header from '../../components/header';
 import Container from '../../components/container';
 import Logo from '../../components/logo';
 import Search from '../../components/search';
+import FullMovieCard from '../../components/full-movie-card';
 import AddMovieButton from '../../components/add-movie-button';
 import Main from '../../components/main';
 import MovieListContainer from '../../components/movie-list-container';
 import Footer from '../../components/footer';
 
+import stubs from '../../components/movie-list-container/mockedMovies.json';
+
 const HomePage = () => {
     return (
         <React.Fragment>
+            <FullMovieCard movie={stubs[1]} />
             <Header>
                 <Container>
                     <Logo styleName='header-logo'/>

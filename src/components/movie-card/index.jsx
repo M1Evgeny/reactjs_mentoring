@@ -87,3 +87,4 @@ MovieCard.defaultProps = {
     image: 'https://picsum.photos/322/455',
     genres: []
 };
+

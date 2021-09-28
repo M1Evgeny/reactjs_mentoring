@@ -1,5 +1,5 @@
 import React from 'react';
-import './EmptyContainer.css';
+import './EmptyComponent.css';
 
 export const EmptyComponent = () =>  (
     <div className="empty-container">

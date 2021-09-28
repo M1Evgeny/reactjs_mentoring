@@ -1,7 +1,8 @@
-#root {
-    color: beige;
-    background-color: coral;
+body {
+    margin: 0;
 }
-#blue {
-    background-color: blue;
+
+#root {
+    background: #424242;
+    width: 1200px;
 }

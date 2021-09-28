@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
+import { ErrorBoundary } from './ErrorBoundary';
+import { HomePage } from './pages/home-page'
 
-function App() {
+export function App() {
   return (
-    <>
-    <div>Ahoy!</div>
-    <div id='blue'>devMode - {process.env.NODE_ENV}</div>
-    </>
+    <ErrorBoundary>
+      <HomePage />
+    </ErrorBoundary>
   );
 }
-
-export default App;

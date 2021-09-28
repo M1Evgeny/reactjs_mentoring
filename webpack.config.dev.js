@@ -27,7 +27,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: [/\.m?js$/, /\.m?jsx$/],
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader"
@@ -36,11 +36,7 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"]
-      }
+       }
     ]
   }
 };

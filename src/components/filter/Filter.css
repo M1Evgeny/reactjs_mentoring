@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    background: #232323;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+  
+  .filter-item {
+    margin: 0.8rem;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  .active-item {
+    border-bottom-width: 2px;
+    border-color: #F65261;
+    border-bottom-style: solid;
+  }

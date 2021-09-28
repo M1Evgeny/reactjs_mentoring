@@ -1,0 +1,34 @@
+.sort {
+    display: flex;
+    background: #232323;
+    margin-bottom: 0;
+    
+} 
+
+.select-label {
+  letter-spacing: 0.888889px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.sortBy {
+    margin: 0.8rem;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+
+  select,
+  select option {
+    border: 0;
+    margin: 0.8rem;
+    background: #232323;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    text-transform: uppercase;
+    font-size: 20px;
+  }

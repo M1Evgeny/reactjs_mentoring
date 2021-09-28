@@ -1,0 +1,30 @@
+.filmCard {
+    margin-bottom: 50px;
+}
+
+.card-body {
+  opacity: 0.6;
+}
+
+.card-img-top {
+  width: 319px;
+  height: 507px;
+  object-fit: contain;
+}
+
+.filmYear {
+  border: 1px solid gray;
+  float: right;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.filmTitle {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+}
+  

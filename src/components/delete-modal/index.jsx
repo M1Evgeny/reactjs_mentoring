@@ -1,7 +1,7 @@
 import React from 'react';
 import './DeleteModal.css';
 
-class DeleteModal extends React.Component {
+export class DeleteModal extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -26,5 +26,3 @@ class DeleteModal extends React.Component {
     }
 
 }
-
-export default DeleteModal;

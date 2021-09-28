@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DeleteModal from '../delete-modal';
-import ModalWindow from '../modal-window';
+import { DeleteModal } from '../delete-modal';
+import { ModalWindow } from '../modal-window';
 
 import styles from './MovieCard.module.css';
 
-class MovieCard extends React.Component {
+export class MovieCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,10 +51,6 @@ class MovieCard extends React.Component {
     };
 
     render() {
-        let genreList;
-        if(this.props.genres.length > 0){
-            genreList = this.props.genres.join(', ');
-        }
         return (
             <article className={styles.filmCard} key={this.props.id}>
                 <div className={styles.hamburger_menu}>
@@ -71,7 +67,7 @@ class MovieCard extends React.Component {
                 <div className={styles.card_body}>
                     <span className={styles.filmTitle}>{this.props.title}</span>
                     <span className={styles.filmYear}>{this.props.release_date}</span>
-                    <p className={styles.card_text}>{genreList}</p>
+                    {this.props.genres.length > 0 && <p className="card-text">{this.props.genres.join(", ")}</p>}
                 </div>
                 <ModalWindow show={this.state.showEditModal} handleModalClose= {this.handleEditModalClose} modalHeight={this.state.editModalHeight} modalTitle={'EDIT MOVIE'} id={this.props.id} /> 
                 <DeleteModal show={this.state.showDeleteModal} handleModalClose= {this.handleDeleteModalClose} modalHeight={this.state.deleteModalHeight} /> 
@@ -91,5 +87,3 @@ MovieCard.defaultProps = {
     image: 'https://picsum.photos/322/455',
     genres: []
 };
-
-export default MovieCard;

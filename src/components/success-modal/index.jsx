@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SuccessModal extends React.Component {
+export class SuccessModal extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -20,5 +20,3 @@ class SuccessModal extends React.Component {
     }
 
 }
-
-export default SuccessModal;

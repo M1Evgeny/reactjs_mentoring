@@ -1,9 +1,9 @@
 import React from 'react';
 import './ModalWindow.css';
 import stubs from '../movie-list-container/mockedMovies.json';
-import SuccessModal from '../success-modal';
+import { SuccessModal } from '../success-modal';
 
-class ModalWindow extends React.Component {
+export class ModalWindow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -126,5 +126,3 @@ class ModalWindow extends React.Component {
         )
     }
 }
-
-export default ModalWindow;

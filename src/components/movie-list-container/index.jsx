@@ -1,14 +1,14 @@
 import React from 'react';
 import './MovieListContainer.css';
 import stubs from './mockedMovies.json';
-import MovieList from '../movie-list';
-import Nav from '../nav';
-import SubTitle from '../sub-title';
-import Sort from '../sort';
-import Filter from '../filter';
-import EmptyComponent from '../empty-component';
+import { MovieList } from '../movie-list';
+import { Nav } from '../nav';
+import { SubTitle } from '../sub-title';
+import { Sort } from '../sort';
+import { Filter } from '../filter';
+import { EmptyComponent } from '../empty-component';
 
-class MovieListContainer extends React.Component {
+export class MovieListContainer extends React.Component {
   constructor() {
     super();
     this.state = { genre: 'all', sortParam: 'release_date', mockedMovies: [] };
@@ -60,5 +60,3 @@ class MovieListContainer extends React.Component {
     );
   }
 }
-
-export default MovieListContainer;

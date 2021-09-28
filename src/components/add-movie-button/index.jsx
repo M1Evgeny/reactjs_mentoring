@@ -1,8 +1,8 @@
 import React from 'react';
 import './AddMovieButton.css';
-import ModalWindow from '../modal-window';
+import { ModalWindow } from '../modal-window';
 
-class AddMovieButton extends React.Component {
+export class AddMovieButton extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -43,5 +43,3 @@ class AddMovieButton extends React.Component {
     )
    }
 }
-
-export default AddMovieButton;

@@ -1,47 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AddMovieButton.css';
 import ModalWindow from '../modal-window';
 
-class AddMovieButton extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            showModal: false,
-            modalHeight: 0
-        };
-        this.handleModalClose = this.handleModalClose.bind(this);
-        this.handleModalCloseAfterSuccess = this.handleModalCloseAfterSuccess.bind(this);
-        this.handleModalOpen = this.handleModalOpen.bind(this);
-    }
+const AddMovieButton = () => {
+    const [showModal, setShowModal] = useState(false);
+    const [modalHeight, setModalHeight] = useState(0);
 
-    handleModalClose = (e) => {
+
+    const handleModalClose = (e) => {
         const currentClass = e.target.className;
         if (currentClass === 'modal-background' || currentClass === 'close') {
-            this.setState({showModal: false});
+            setShowModal(false);
         };
     };
 
-    handleModalCloseAfterSuccess = () => this.setState({showModal: false});
+    const handleModalCloseAfterSuccess = () => setShowModal(false);
 
-    handleModalOpen = () => {
-        this.setState({
-            showModal: true,
-            modalHeight: document.body.scrollHeight
-        });
+    const handleModalOpen = () => {
+        setShowModal(true);
+        setModalHeight(document.body.scrollHeight);
     };
 
-
-   render(){
-       return (
+    return (
         <div>
-            <button type="button" className="addMovie" onClick={() => this.handleModalOpen()}>
+            <button type="button" className="addMovie" onClick={() => handleModalOpen()}>
                 + add movie 
             </button>
-            <ModalWindow show={this.state.showModal} handleModalClose= {this.handleModalClose} modalHeight={this.state.modalHeight} 
-                modalTitle={'ADD MOVIE'} handleModalCloseAfterSuccess= {this.handleModalCloseAfterSuccess} />
+            <ModalWindow show={showModal} handleModalClose= {handleModalClose} modalHeight={modalHeight} 
+                modalTitle={'ADD MOVIE'} handleModalCloseAfterSuccess= {handleModalCloseAfterSuccess} />
         </div>
     )
-   }
 }
 
 export default AddMovieButton;

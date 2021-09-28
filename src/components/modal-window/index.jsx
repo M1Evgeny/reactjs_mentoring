@@ -1,130 +1,105 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ModalWindow.css';
 import stubs from '../movie-list-container/mockedMovies.json';
 import SuccessModal from '../success-modal';
 
-class ModalWindow extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: this.props.id ? this.props.id : '',
-            title: '',
-            releseDate: '',
-            movieUrl: '',
-            rating: '',
-            runtime: '',
-            overview: '',
-            showAddedMovieModal: false,
-            modalHeight: 0
-        };
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleModalClose = this.handleModalClose.bind(this);
-    }
+const ModalWindow = (props) => {
+    const[id, setId]= useState(props.id ? props.id : 0);
+    const[title, setTitle]= useState('');
+    const[releseDate, setReleseDate]= useState('');
+    const[movieUrl, setMovieUrl]= useState('');
+    const[rating, setRating]= useState('');
+    const[runtime, setRuntime]= useState('');
+    const[overview, setOverview]= useState('');
+    const[showAddedMovieModal, setShowAddedMovieModal]= useState(false);
+    const[modalHeight, setModalHeight]= useState(0);
 
-    componentDidMount(){
-        if(this.state.id !== ''){
-            const movie = stubs.filter(movie => movie.id === this.props.id)[0];
-            this.setState({
-                title: movie.title,
-                releseDate: movie.release_date,
-                movieUrl: movie.movieUrl ? movie.movieUrl : '',
-                rating: movie.vote_average,
-                runtime: movie.runtime,
-                overview: movie.overview
-            });
+    useEffect(() => {
+        if(id !== 0){
+            const movie = stubs.filter(movie => movie.id === id)[0];
+            setTitle(movie.title);
+            setReleseDate(movie.release_date);
+            setMovieUrl(() => movie.movieUrl ? movie.movieUrl : '');
+            setRating(movie.vote_average);
+            setRuntime(movie.runtime);
+            setOverview(movie.overview);
         }
-    }
+    })
 
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-    
-        this.setState({
-          [name]: value
-        });
-    }
-
-    handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        if(this.props.modalTitle === 'ADD MOVIE'){
-            this.props.handleModalCloseAfterSuccess();
-            this.setState({
-                showAddedMovieModal: true,
-                modalHeight: document.body.scrollHeight
-            });
+        if(props.modalTitle === 'ADD MOVIE'){
+            props.handleModalCloseAfterSuccess();
+            setShowAddedMovieModal(true);
+            setModalHeight(document.body.scrollHeight);
         }
     }
 
-    handleModalClose = (e) => {
+    const handleModalClose = (e) => {
         const currentClass = e.target.className;
         if (currentClass === 'modal-background' || currentClass === 'close') {
-            this.setState({showAddedMovieModal: false});
+            setShowAddedMovieModal(false);
         };
     };
     
-    
-    render(){
-        return ( 
-            <>
-                <div hidden={!this.props.show} className="modal-background" onClick={(e) => this.props.handleModalClose(e)} style={{height: this.props.modalHeight}}>
-                    <div className="modal-card">
-                        <div className="modal__close">
-                            <button type="button" className="close" title="Close" >X</button>
-                        </div>
-                        <h1 className="modal-title">{this.props.modalTitle}</h1>
-                        <form className="modal-form" onSubmit={this.handleSubmit}>
-                            <fieldset className="modal-fieldset">
-                                <label className="modal-label">
-                                    Title
-                                    <input type="text" name="title" placeholder="Title" value={this.state.title} onChange={this.handleInputChange} />
-                                </label>
-                                <label className="modal-label-second">
-                                    RELEASE DATE
-                                    <input type="date" name="releseDate" placeholder="yyyy-mm-dd" value={this.state.releseDate} onChange={this.handleInputChange} />
-                                </label>
-                            </fieldset>
-                            <fieldset className="modal-fieldset">
-                                <label className="modal-label">
-                                    movie url
-                                    <input type="url" name="movieUrl" placeholder="https:///" value={this.state.movieUrl} onChange={this.handleInputChange} />
-                                </label>
-                                <label className="modal-label-second">
-                                    RATING
-                                    <input type="number" name="rating" placeholder="7.8" value={this.state.rating} onChange={this.handleInputChange} />
-                                </label>
-                            </fieldset>
-                            <fieldset className="modal-fieldset">
-                                <label className="modal-label">
-                                    genre
-                                    <select multiple>
-                                        <option value="crime" defaultValue>crime</option>
-                                        <option value="horror" defaultValue>horror</option>
-                                    </select>
-                                </label>
-                                <label className="modal-label-second">
-                                    RUNTIME
-                                    <input type="number" name="runtime" placeholder="minutes" value={this.state.runtime} onChange={this.handleInputChange} />
-                                </label>
-                            </fieldset>
-                            <fieldset className="modal-fieldset">
-                                <label className="modal-label">
-                                    OVERVIEW
-                                    <textarea className="overview-input" type="text" name="overview" placeholder="Movie description" value={this.state.overview}  onChange={this.handleInputChange} />
-                                </label>
-                            </fieldset>
-                            <p className="modal-buttons">
-                                <input className="modal-reset" type="reset" value="reset" />
-                                <input className="modal-submit" type="submit" value="submit" />
-                            </p>
-                        </form>
+    return ( 
+        <>
+            <div hidden={!props.show} className="modal-background" onClick={(e) => props.handleModalClose(e)} style={{height: props.modalHeight}}>
+                <div className="modal-card">
+                    <div className="modal__close">
+                        <button type="button" className="close" title="Close" >X</button>
                     </div>
+                    <h1 className="modal-title">{props.modalTitle}</h1>
+                    <form className="modal-form" onSubmit={handleSubmit}>
+                        <fieldset className="modal-fieldset">
+                            <label className="modal-label">
+                                Title
+                                <input type="text" name="title" placeholder="Title" value={title} onChange={setTitle} />
+                            </label>
+                            <label className="modal-label-second">
+                                RELEASE DATE
+                                <input type="date" name="releseDate" placeholder="yyyy-mm-dd" value={releseDate} onChange={setReleseDate} />
+                            </label>
+                        </fieldset>
+                        <fieldset className="modal-fieldset">
+                            <label className="modal-label">
+                                movie url
+                                <input type="url" name="movieUrl" placeholder="https:///" value={movieUrl} onChange={setMovieUrl} />
+                            </label>
+                            <label className="modal-label-second">
+                                RATING
+                                <input type="number" name="rating" placeholder="7.8" value={rating} onChange={setRating} />
+                            </label>
+                        </fieldset>
+                        <fieldset className="modal-fieldset">
+                            <label className="modal-label">
+                                genre
+                                <select multiple>
+                                    <option value="crime" defaultValue>crime</option>
+                                    <option value="horror" defaultValue>horror</option>
+                                </select>
+                            </label>
+                            <label className="modal-label-second">
+                                RUNTIME
+                                <input type="number" name="runtime" placeholder="minutes" value={runtime} onChange={setRuntime} />
+                            </label>
+                        </fieldset>
+                        <fieldset className="modal-fieldset">
+                            <label className="modal-label">
+                                OVERVIEW
+                                <textarea className="overview-input" type="text" name="overview" placeholder="Movie description" value={overview}  onChange={setOverview} />
+                            </label>
+                        </fieldset>
+                        <p className="modal-buttons">
+                            <input className="modal-reset" type="reset" value="reset" />
+                            <input className="modal-submit" type="submit" value="submit" />
+                        </p>
+                    </form>
                 </div>
-                <SuccessModal show={this.state.showAddedMovieModal} handleModalClose= {this.handleModalClose} modalHeight={this.state.modalHeight} />
-            </>
-        )
-    }
+            </div>
+            <SuccessModal show={showAddedMovieModal} handleModalClose= {handleModalClose} modalHeight={modalHeight} />
+        </>
+    )
 }
 
 export default ModalWindow;

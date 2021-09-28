@@ -1,6 +1,6 @@
 import React from 'react';
 import './MovieList.css';
-import MovieCard from '../movie-card';
+import { MovieCard } from '../movie-card';
 
 const MovieList = ({movies}) => {
     return (

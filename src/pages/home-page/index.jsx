@@ -7,24 +7,28 @@ import FullMovieCard from '../../components/full-movie-card';
 import AddMovieButton from '../../components/add-movie-button';
 import Main from '../../components/main';
 import MovieListContainer from '../../components/movie-list-container';
-import Footer from '../../components/footer';
-
-import stubs from '../../components/movie-list-container/mockedMovies.json';
+import { Footer } from '../../components/footer';
+import { useId } from './id-context';
 
 const HomePage = () => {
+    const[movieId] = useId();
+
     return (
         <React.Fragment>
-            <FullMovieCard movie={stubs[1]} />
-            <Header>
-                <Container>
-                    <Logo styleName='header-logo'/>
-                    <AddMovieButton />
-                </Container>
-                <Search />
-            </Header>
-            <Main>
-                <MovieListContainer/>
-            </Main>
+                {
+                    movieId !== 0 ? <FullMovieCard movie={movieId} /> :
+                        <Header>
+                            <Container>
+                                <Logo styleName='header-logo'/>
+                                <AddMovieButton />
+                            </Container>
+                            <Search />
+                        </Header>
+                }
+                <Main>
+                    <MovieListContainer/>
+                </Main>
+
             <Footer>
                 <Logo styleName='footer-logo'/>
             </Footer>

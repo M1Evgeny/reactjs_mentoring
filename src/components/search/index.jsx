@@ -1,11 +1,11 @@
 import React from 'react';
 import './Search.css';
 
-const Search = () => {
+export const Search = () => {
     return (
         <div className="find-movie-container">
             <h1 className="findmovie">FIND YOUR MOVIE</h1>
-                <form className="">
+                <form>
                     <input className="searchField" type="text" placeholder="What do you want to watch?"/>
                     <button type="button" className="searchButton">
                         Search 
@@ -14,5 +14,3 @@ const Search = () => {
         </div>
     )
 }
-
-export default Search;

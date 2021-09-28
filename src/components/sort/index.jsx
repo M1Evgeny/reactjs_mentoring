@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sort.css';
 
-const Sort = ({setSortParam}) => {
+export const Sort = ({setSortParam}) => {
     return (
         <div className="sort">
             <label className="sortBy">
@@ -14,5 +14,3 @@ const Sort = ({setSortParam}) => {
       </div>
     )
 }
-
-export default Sort;

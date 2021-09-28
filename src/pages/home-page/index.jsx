@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from '../../components/header';
-import Container from '../../components/container';
-import Logo from '../../components/logo';
-import Search from '../../components/search';
-import AddMovieButton from '../../components/add-movie-button';
-import Main from '../../components/main';
-import MovieListContainer from '../../components/movie-list-container';
-import Footer from '../../components/footer';
+import { Header } from '../../components/header';
+import { Container } from '../../components/container';
+import { Logo } from '../../components/logo';
+import { Search } from '../../components/search';
+import { AddMovieButton } from '../../components/add-movie-button';
+import { Main } from '../../components/main';
+import { MovieListContainer } from '../../components/movie-list-container';
+import { Footer } from '../../components/footer';
 
-const HomePage = () => {
+export const HomePage = () => {
     return (
         <React.Fragment>
             <Header>
@@ -27,5 +27,3 @@ const HomePage = () => {
         </React.Fragment>
     )
 }
-
-export default HomePage;

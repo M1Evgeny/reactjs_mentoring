@@ -2,7 +2,7 @@ import React from 'react';
 import './Filter.css';
 import PropTypes from 'prop-types';
 
-const Filter = ({filterMovies}) => {
+export const Filter = ({filterMovies}) => {
     return (
         <ul className="container">
           <li className='filter-item' onClick={() => filterMovies("all")} >all</li>
@@ -16,5 +16,3 @@ const Filter = ({filterMovies}) => {
 Filter.prototype = {
   filterMovies: PropTypes.func
 }
-
-export default Filter;

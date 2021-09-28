@@ -1,8 +1,8 @@
 import React from 'react';
 import './MovieList.css';
-import MovieCard from '../movie-card';
+import { MovieCard } from '../movie-card';
 
-const MovieList = ({movies}) => {
+export const MovieList = ({movies}) => {
     return (
         <div className="movie-list">
             {movies.map(({ title, release_date, genres, poster_path, id }) => (
@@ -11,5 +11,3 @@ const MovieList = ({movies}) => {
         </div>
     )
 }
-
-export default MovieList;

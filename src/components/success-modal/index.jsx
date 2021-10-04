@@ -7,7 +7,7 @@ export class SuccessModal extends React.Component {
 
     render() {
         return (
-            <div hidden={!this.props.show} className="modal-background" onClick={(e) => this.props.handleModalClose(e)} style={{height: this.props.modalHeight}}>
+            <div hidden={this.props.hidden} className="modal-background" onClick={(e) => this.props.handleModalClose(e)} style={{height: document.body.scrollHeight}}>
                 <div className="delete-modal-card">
                     <div className="modal__close">
                         <button type="button" className="close" title="Close" >X</button>

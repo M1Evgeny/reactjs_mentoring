@@ -1,45 +1,16 @@
 import React from 'react';
 import './AddMovieButton.css';
-import { ModalWindow } from '../modal-window';
+import { useModal } from '../context/modal-context';
 
-export class AddMovieButton extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            showModal: false,
-            modalHeight: 0
-        };
-        this.handleModalClose = this.handleModalClose.bind(this);
-        this.handleModalCloseAfterSuccess = this.handleModalCloseAfterSuccess.bind(this);
-        this.handleModalOpen = this.handleModalOpen.bind(this);
-    }
+export const AddMovieButton = () => {
+    const [modalObject, setModalObject] = useModal();
+    const handleModalOpen = () => setModalObject({'modalType': 'add-movie'});
 
-    handleModalClose = (e) => {
-        const currentClass = e.target.className;
-        if (currentClass === 'modal-background' || currentClass === 'close') {
-            this.setState({showModal: false});
-        };
-    };
-
-    handleModalCloseAfterSuccess = () => this.setState({showModal: false});
-
-    handleModalOpen = () => {
-        this.setState({
-            showModal: true,
-            modalHeight: document.body.scrollHeight
-        });
-    };
-
-
-   render(){
-       return (
+    return (
         <div>
-            <button type="button" className="addMovie" onClick={() => this.handleModalOpen()}>
+            <button type="button" className="addMovie" onClick={() => handleModalOpen()}>
                 + add movie 
             </button>
-            <ModalWindow show={this.state.showModal} handleModalClose= {this.handleModalClose} modalHeight={this.state.modalHeight} 
-                modalTitle={'ADD MOVIE'} handleModalCloseAfterSuccess= {this.handleModalCloseAfterSuccess} />
         </div>
     )
-   }
 }

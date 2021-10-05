@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './AddMovieButton.css';
 import { useModal } from '../context/modal-context';
 

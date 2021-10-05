@@ -8,7 +8,7 @@ import Sort from '../sort';
 import Filter from '../filter';
 import EmptyComponent from '../empty-component';
 
-const MovieListContainer = () => {
+export const MovieListContainer = () => {
   const [genre, setGenre] = useState('all');
   const [sortParam, setSortParam] = useState('release_date');
   const [mockedMovies, setMockedMovies] = useState([]);
@@ -54,5 +54,3 @@ const MovieListContainer = () => {
       </React.Fragment>
     );
 }
-
-export default MovieListContainer;

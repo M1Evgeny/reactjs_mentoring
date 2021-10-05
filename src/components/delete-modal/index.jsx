@@ -1,9 +1,9 @@
 import React from 'react';
 import './DeleteModal.css';
 
-const DeleteModal =(props) =>{
+export const DeleteModal = (props) => {
     return (
-        <div hidden={!props.show} className="modal-background" onClick={(e) => props.handleModalClose(e)} style={{height: props.modalHeight}}>
+        <div hidden={props.hidden} className="modal-background" onClick={(e) => props.handleModalClose(e)} style={{height: document.body.scrollHeight}}>
             <div className="delete-modal-card">
                 <div className="modal__close">
                     <button type="button" className="close" title="Close" >X</button>
@@ -19,5 +19,3 @@ const DeleteModal =(props) =>{
         </div>
     )
 }
-
-export default DeleteModal;

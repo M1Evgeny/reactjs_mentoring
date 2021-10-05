@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useModal } from '../context/modal-context';
 import './ModalWindow.css';
 import stubs from '../movie-list-container/mockedMovies.json';
-import SuccessModal from '../success-modal';
 
-const ModalWindow = (props) => {
+export const ModalWindow = (props) => {
+    const { setModalObject } = useModal();
     const[id, setId]= useState(props.id ? props.id : 0);
     const[title, setTitle]= useState('');
     const[releseDate, setReleseDate]= useState('');
@@ -11,8 +12,6 @@ const ModalWindow = (props) => {
     const[rating, setRating]= useState('');
     const[runtime, setRuntime]= useState('');
     const[overview, setOverview]= useState('');
-    const[showAddedMovieModal, setShowAddedMovieModal]= useState(false);
-    const[modalHeight, setModalHeight]= useState(0);
 
     useEffect(() => {
         if(id !== 0){
@@ -24,27 +23,18 @@ const ModalWindow = (props) => {
             setRuntime(movie.runtime);
             setOverview(movie.overview);
         }
-    })
+    }, [id])
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if(props.modalTitle === 'ADD MOVIE'){
-            props.handleModalCloseAfterSuccess();
-            setShowAddedMovieModal(true);
-            setModalHeight(document.body.scrollHeight);
+            setModalObject({modalType: 'success-modal'});
         }
     }
-
-    const handleModalClose = (e) => {
-        const currentClass = e.target.className;
-        if (currentClass === 'modal-background' || currentClass === 'close') {
-            setShowAddedMovieModal(false);
-        };
-    };
     
     return ( 
         <>
-            <div hidden={!props.show} className="modal-background" onClick={(e) => props.handleModalClose(e)} style={{height: props.modalHeight}}>
+            <div hidden={props.hidden} className="modal-background" onClick={(e) => props.handleModalClose(e)} style={{height: document.body.scrollHeight}}>
                 <div className="modal-card">
                     <div className="modal__close">
                         <button type="button" className="close" title="Close" >X</button>
@@ -64,7 +54,7 @@ const ModalWindow = (props) => {
                         <fieldset className="modal-fieldset">
                             <label className="modal-label">
                                 movie url
-                                <input type="url" name="movieUrl" placeholder="https:///" value={movieUrl} onChange={setMovieUrl} />
+                                <input type="url" name="movieUrl" placeholder="https://" value={movieUrl} onChange={setMovieUrl} />
                             </label>
                             <label className="modal-label-second">
                                 RATING
@@ -97,9 +87,6 @@ const ModalWindow = (props) => {
                     </form>
                 </div>
             </div>
-            <SuccessModal show={showAddedMovieModal} handleModalClose= {handleModalClose} modalHeight={modalHeight} />
         </>
     )
 }
-
-export default ModalWindow;

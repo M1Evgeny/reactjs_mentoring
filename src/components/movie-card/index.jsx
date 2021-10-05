@@ -1,49 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import DeleteModal from '../delete-modal';
-import ModalWindow from '../modal-window';
+import { useModal } from '../context/modal-context';
 import { useId } from '../../pages/home-page/id-context';
-
 import styles from './MovieCard.module.css';
 
 export const MovieCard = (props) => {
+    const { setModalObject } = useModal();
     const [movieId, setMovieId] = useId();
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [deleteModalHeight, setDeleteModalHeight] = useState(0);
-    const [showEditModal, setShowEditModal] = useState(false);
-    const [editModalHeight, setEditModalHeight] = useState(0);
-
-    const handleDeleteModalClose = (e) => {
-        const currentClass = e.target.className;
-        if (currentClass === 'modal-background' || currentClass === 'close') {
-            setShowDeleteModal(false);
-        };
-    };
-
-    const handleEditModalClose = (e) => {
-        const currentClass = e.target.className;
-        if (currentClass === 'modal-background' || currentClass === 'close') {
-            setShowEditModal(false);
-        };
-    };
 
     const handleModalOpen = (e) => {
         e.preventDefault();
         const buttonId = e.target.id;
         if(buttonId === 'delete-button'){
-            setShowDeleteModal(true);
-            setDeleteModalHeight(document.body.scrollHeight);
+            setModalObject({modalType: 'delete-modal', id: props.id})
         }
         if(buttonId === 'edit-button'){
-            setShowEditModal(true);
-            setEditModalHeight(document.body.scrollHeight);
+            setModalObject({modalType: 'edit-movie', id: props.id});
         }
     };
-
-    let genreList = props.genres;;
-    if(props.genres.length > 0){
-        genreList = props.genres.join(', ');
-    }
 
     return (
         <article className={styles.filmCard} key={props.id} onClick={() => setMovieId(props.id)} >
@@ -61,10 +35,8 @@ export const MovieCard = (props) => {
             <div className={styles.card_body}>
                 <span className={styles.filmTitle}>{props.title}</span>
                 <span className={styles.filmYear}>{props.release_date}</span>
-                <p className={styles.card_text}>{genreList}</p>
+                {props.genres.length > 0 && <p className="card-text">{props.genres.join(", ")}</p>}
             </div>
-            <ModalWindow show={showEditModal} handleModalClose= {handleEditModalClose} modalHeight={editModalHeight} modalTitle={'EDIT MOVIE'} id={props.id} /> 
-            <DeleteModal show={showDeleteModal} handleModalClose= {handleDeleteModalClose} modalHeight={deleteModalHeight} /> 
         </article>
     )
 }

@@ -3,15 +3,17 @@ import './App.css';
 import ErrorBoundary from './ErrorBoundary';
 import HomePage from './pages/home-page'
 import { IdProvider } from './pages/home-page/id-context';
+import { ModalProvider } from './components/context/modal-context';
 
-function App() {
+
+export function App() {
   return (
     <ErrorBoundary>
-      <IdProvider>
-        <HomePage />
-      </IdProvider>
+      <ModalProvider>
+        <IdProvider>
+          <HomePage />
+        </IdProvider>
+      </ModalProvider>
     </ErrorBoundary>
   );
 }
-
-export default App;

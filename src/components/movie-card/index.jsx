@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useModal } from '../context/modal-context';
-import { useId } from '../../pages/home-page/id-context';
+import { useId } from '../context/id-context';
 import styles from './MovieCard.module.css';
 
 export const MovieCard = (props) => {
     const { setModalObject } = useModal();
-    const [movieId, setMovieId] = useId();
+    const { setMovieId } = useId();
 
     const handleModalOpen = (e) => {
         e.preventDefault();

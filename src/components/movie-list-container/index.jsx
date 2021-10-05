@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './MovieListContainer.css';
 import stubs from './mockedMovies.json';
-import MovieList from '../movie-list';
-import Nav from '../nav';
-import SubTitle from '../sub-title';
-import Sort from '../sort';
-import Filter from '../filter';
-import EmptyComponent from '../empty-component';
+import { MovieList } from '../movie-list';
+import { Nav } from '../nav';
+import { SubTitle } from '../sub-title';
+import { Sort } from '../sort';
+import { Filter } from '../filter';
+import { EmptyComponent } from '../empty-component';
 
 export const MovieListContainer = () => {
   const [genre, setGenre] = useState('all');

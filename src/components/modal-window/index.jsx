@@ -4,7 +4,7 @@ import './ModalWindow.css';
 import stubs from '../movie-list-container/mockedMovies.json';
 
 export const ModalWindow = (props) => {
-    const [modalObject, setModalObject] = useModal();
+    const [{ setModalObject }] = useModal();
     const[id, setId]= useState(props.id ? props.id : 0);
     const[title, setTitle]= useState('');
     const[releseDate, setReleseDate]= useState('');
@@ -23,12 +23,12 @@ export const ModalWindow = (props) => {
             setRuntime(movie.runtime);
             setOverview(movie.overview);
         }
-    })
+    }, [id])
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if(props.modalTitle === 'ADD MOVIE'){
-            setModalObject({'modalType': 'success-modal'});
+            setModalObject({modalType: 'success-modal'});
         }
     }
     
@@ -54,7 +54,7 @@ export const ModalWindow = (props) => {
                         <fieldset className="modal-fieldset">
                             <label className="modal-label">
                                 movie url
-                                <input type="url" name="movieUrl" placeholder="https:///" value={movieUrl} onChange={setMovieUrl} />
+                                <input type="url" name="movieUrl" placeholder="https://" value={movieUrl} onChange={setMovieUrl} />
                             </label>
                             <label className="modal-label-second">
                                 RATING

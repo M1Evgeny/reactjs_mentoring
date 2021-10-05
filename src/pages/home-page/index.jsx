@@ -5,7 +5,7 @@ import { Logo } from '../../components/logo';
 import { Search } from '../../components/search';
 import { AddMovieButton } from '../../components/add-movie-button';
 import { Main } from '../../components/main';
-import { ModalProvider } from '../../components/modal-provider';
+import { RootModal } from '../../components/root-modal';
 import { MovieListContainer } from '../../components/movie-list-container';
 import { Footer } from '../../components/footer';
 
@@ -21,7 +21,7 @@ export const HomePage = () => {
             </Header>
             <Main>
                 <MovieListContainer/>
-                <ModalProvider />
+                <RootModal />
             </Main>
             <Footer>
                 <Logo styleName='footer-logo'/>

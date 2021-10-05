@@ -4,8 +4,8 @@ import { ModalWindow } from "../modal-window";
 import { DeleteModal } from "../delete-modal";
 import { SuccessModal } from "../success-modal";
 
-export const ModalProvider = () => {
-  const [modalObject, setModalObject] = useModal();
+export const RootModal = () => {
+  const [{ modalObject, setModalObject }] = useModal();
 
   const handleModalClose = (e) => {
     const currentClass = e.target.className;

@@ -5,7 +5,7 @@ import { DeleteModal } from "../delete-modal";
 import { SuccessModal } from "../success-modal";
 
 export const RootModal = () => {
-  const [{ modalObject, setModalObject }] = useModal();
+  const { modalObject, setModalObject } = useModal();
 
   const handleModalClose = (e) => {
     const currentClass = e.target.className;

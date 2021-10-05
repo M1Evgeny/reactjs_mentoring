@@ -4,7 +4,7 @@ const ModalContext = React.createContext();
 
 export function ModalProvider(props) {
     const [modalObject, setModalObject] = React.useState({});
-    const value = React.useMemo(() => [{ modalObject, setModalObject }], [modalObject]);
+    const value = React.useMemo(() => ({ modalObject, setModalObject }), [modalObject]);
     return <ModalContext.Provider value={value} {...props} />;
 }
 

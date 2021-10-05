@@ -3,7 +3,7 @@ import './AddMovieButton.css';
 import { useModal } from '../context/modal-context';
 
 export const AddMovieButton = () => {
-    const [{ setModalObject }] = useModal();
+    const { setModalObject } = useModal();
     const handleModalOpen = () => setModalObject({modalType: 'add-movie'});
 
     return (

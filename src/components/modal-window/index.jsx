@@ -4,7 +4,7 @@ import './ModalWindow.css';
 import stubs from '../movie-list-container/mockedMovies.json';
 
 export const ModalWindow = (props) => {
-    const [{ setModalObject }] = useModal();
+    const { setModalObject } = useModal();
     const[id, setId]= useState(props.id ? props.id : 0);
     const[title, setTitle]= useState('');
     const[releseDate, setReleseDate]= useState('');

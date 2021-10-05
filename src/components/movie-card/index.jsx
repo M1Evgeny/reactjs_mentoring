@@ -4,16 +4,16 @@ import { useModal } from '../context/modal-context';
 import styles from './MovieCard.module.css';
 
 export const MovieCard = (props) => {
-    const [{ setModalObject }] = useModal();
+    const { setModalObject } = useModal();
 
     const handleModalOpen = (e) => {
         e.preventDefault();
         const buttonId = e.target.id;
         if(buttonId === 'delete-button'){
-            setModalObject({modalType: 'delete-modal', 'id': props.id})
+            setModalObject({modalType: 'delete-modal', id: props.id})
         }
         if(buttonId === 'edit-button'){
-            setModalObject({modalType: 'edit-movie', 'id': props.id});
+            setModalObject({modalType: 'edit-movie', id: props.id});
         }
     };
 

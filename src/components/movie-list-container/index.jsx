@@ -37,7 +37,7 @@ export const MovieListContainer = () => {
 
   useEffect(() => {
     setMockedMovies(stubs);
-  });
+  }, []);
 
   const foundMovies = sortMovies(filterMovies(mockedMovies));
   const movieListMakrUp =() => <><SubTitle movieListLength = {foundMovies.length} /><MovieList movies={foundMovies} /></>;

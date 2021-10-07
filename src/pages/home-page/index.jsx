@@ -15,7 +15,7 @@ export const HomePage = () => {
   const { movieId } = useId();
 
   return (
-    <React.Fragment>
+    <>
       {movieId !== 0 ? (
         <FullMovieCard movie={movieId} />
       ) : (
@@ -29,11 +29,11 @@ export const HomePage = () => {
       )}
       <Main>
         <MovieListContainer />
-        <RootModal />
       </Main>
       <Footer>
         <Logo styleName="footer-logo" />
       </Footer>
-    </React.Fragment>
+      <RootModal />
+    </>
   );
 };

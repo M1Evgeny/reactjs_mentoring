@@ -18,13 +18,12 @@ export const RootModal = () => {
     case "add-movie":
       return (
         <ModalWindow
-          hidden={false}
           handleModalClose={handleModalClose}
           modalTitle={"ADD MOVIE"}
         />
       );
     case "delete-modal":
-      return <DeleteModal hidden={false} handleModalClose={handleModalClose} />;
+      return <DeleteModal handleModalClose={handleModalClose} />;
     case "edit-movie":
       return (
         <ModalWindow
@@ -36,7 +35,7 @@ export const RootModal = () => {
       );
     case "success-modal":
       return (
-        <SuccessModal hidden={false} handleModalClose={handleModalClose} />
+        <SuccessModal handleModalClose={handleModalClose} />
       );
     default:
       return "";

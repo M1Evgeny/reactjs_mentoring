@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useModal } from '../context/modal-context';
+import { useId } from '../context/id-context';
 import styles from './MovieCard.module.css';
 
 export const MovieCard = (props) => {
     const { setModalObject } = useModal();
+    const { setMovieId } = useId();
 
     const handleModalOpen = (e) => {
         e.preventDefault();
@@ -18,7 +20,7 @@ export const MovieCard = (props) => {
     };
 
     return (
-        <article className={styles.filmCard} key={props.id} >
+        <article className={styles.filmCard} key={props.id} onClick={() => setMovieId(props.id)} >
             <div className={styles.hamburger_menu}>
                 <input id={`menu__toggle${props.id}`} className={styles.menu__toggle} type="checkbox" />
                 <label className={styles.menu__btn} htmlFor={`menu__toggle${props.id}`}>

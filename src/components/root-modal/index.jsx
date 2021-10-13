@@ -27,16 +27,13 @@ export const RootModal = () => {
     case "edit-movie":
       return (
         <ModalWindow
-          hidden={false}
           handleModalClose={handleModalClose}
           modalTitle={"EDIT MOVIE"}
           id={modalObject.id}
         />
       );
     case "success-modal":
-      return (
-        <SuccessModal handleModalClose={handleModalClose} />
-      );
+      return <SuccessModal handleModalClose={handleModalClose} />;
     default:
       return "";
   }

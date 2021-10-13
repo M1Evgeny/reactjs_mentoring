@@ -1,32 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./FullMovieCard.module.css";
 import { Logo } from "../logo";
 import { useId } from "../context/id-context";
-import stubs from "../movie-list-container/mockedMovies.json";
+import { fetchMovieByIdActionCreator } from "../../store/actionCreators/fetchMovieById";
+import { connect } from "react-redux";
 
-export function FullMovieCard() {
+function FullMovieCardTemplate({ movie, fetchMovie }) {
   const { movieId, setMovieId } = useId();
-  const [title, setTitle] = useState("");
-  const [releaseYear, setReleaseYear] = useState("");
-  const [genres, setGenres] = useState([]);
-  const [voteAverage, setVoteAverage] = useState("");
-  const [overview, setOverview] = useState("");
-  const [posterPath, setPosterPath] = useState("");
-  const [hours, setHours] = useState("");
-  const [mins, setMins] = useState("");
-
   const closeMovieCard = () => setMovieId(0);
 
   useEffect(() => {
-    const movie = stubs.filter((movie) => movie.id === movieId)[0];
-    setTitle(movie.title);
-    setGenres(movie.genres);
-    setVoteAverage(movie.vote_average);
-    setOverview(movie.overview);
-    setReleaseYear(new Date(movie.release_date).getFullYear());
-    setPosterPath(movie.poster_path);
-    setHours(Math.floor(movie.runtime / 60));
-    setMins(Math.floor(movie.runtime % 60));
+    fetchMovie(movieId);
   }, [movieId]);
 
   return (
@@ -45,24 +29,48 @@ export function FullMovieCard() {
         </button>
       </div>
       <article className={styles.article}>
-        <img src={posterPath} className={styles.card_img_top} alt="..." />
+        <img
+          src={movie.poster_path}
+          className={styles.card_img_top}
+          alt={movie.title}
+        />
         <section className={styles.section}>
           <p>
-            <span className={styles.movie_title}>{title}</span>
-            <span className={styles.movie_rating}>{voteAverage}</span>
+            <span className={styles.movie_title}>{movie.title}</span>
+            <span className={styles.movie_rating}>{movie.vote_average}</span>
           </p>
-          {genres.length > 0 && (
-            <p className={styles.genre_list}>{genres.join(", ")}</p>
+          {movie.genres !== undefined && movie.genres.length > 0 && (
+            <p className={styles.genre_list}>{movie.genres.join(", ")}</p>
           )}
           <p>
-            <span className={styles.release_date}>{releaseYear}</span>
             <span className={styles.release_date}>
-              {hours}h {mins}min
+              {new Date(movie.release_date).getFullYear()}
+            </span>
+            <span className={styles.release_date}>
+              {Math.floor(movie.runtime / 60)}h {Math.floor(movie.runtime % 60)}
+              min
             </span>
           </p>
-          <p className={styles.movie_overview}>{overview}</p>
+          <p className={styles.movie_overview}>{movie.overview}</p>
         </section>
       </article>
     </header>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    movie: state.movie,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchMovie: (movieId) => dispatch(fetchMovieByIdActionCreator(movieId)),
+  };
+};
+
+export const FullMovieCard = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FullMovieCardTemplate);

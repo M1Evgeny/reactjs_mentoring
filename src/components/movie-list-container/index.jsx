@@ -1,56 +1,71 @@
-import React, { useState, useEffect } from 'react';
-import './MovieListContainer.css';
-import stubs from './mockedMovies.json';
-import { MovieList } from '../movie-list';
-import { Nav } from '../nav';
-import { SubTitle } from '../sub-title';
-import { Sort } from '../sort';
-import { Filter } from '../filter';
-import { EmptyComponent } from '../empty-component';
+import React, { useEffect } from "react";
+import "./MovieListContainer.css";
+import { MovieList } from "../movie-list";
+import { Nav } from "../nav";
+import { SubTitle } from "../sub-title";
+import { Sort } from "../sort";
+import { Filter } from "../filter";
+import { EmptyComponent } from "../empty-component";
+import { fetchMoviesActionCreator } from "../../store/actionCreators/fetchMovies";
+import { connect } from "react-redux";
+import { setFilterActionCreator } from "../../store/actionCreators/filter-movies";
+import { setSortActionCreator } from "../../store/actionCreators/sort-movies";
 
-export const MovieListContainer = () => {
-  const [genre, setGenre] = useState('all');
-  const [sortParam, setSortParam] = useState('release_date');
-  const [mockedMovies, setMockedMovies] = useState([]);
-
-
-  const filterMovies = (movies) => {
-    if (genre === 'all') return movies;
-    return movies.filter((movie) => movie.genres.includes(genre));
-  }
-
+const MovieListContainerTwo = ({
+  films,
+  fetchMovies,
+  loading,
+  genre,
+  sortParam,
+  setFilter,
+  setSort,
+}) => {
   const filterByGenre = (genre) => {
-    setGenre(genre);
-  }
+    setFilter(genre);
+  };
 
-  const applySortParam = (sortParam) => {
-    setSortParam(sortParam);
-  }
-
-  const sortMovies = (movies) => {
-    let copyOfMovies = movies.slice();
-    if (sortParam === 'release_date') {
-      return copyOfMovies.sort((a, b) => new Date(b[sortParam]) - new Date(a[sortParam]));
-    }
-      return copyOfMovies.sort((a, b) => b[sortParam] > a[sortParam] ? 1 : -1);
-  }
+  const applySortParam = (sortParam) => setSort(sortParam);
 
   useEffect(() => {
-    setMockedMovies(stubs);
-  }, []);
+    fetchMovies();
+  }, [genre, sortParam]);
 
-  const foundMovies = sortMovies(filterMovies(mockedMovies));
-  const movieListMakrUp =() => <><SubTitle movieListLength = {foundMovies.length} /><MovieList movies={foundMovies} /></>;
+  const movieListMakrUp = () => (
+    <>
+      <SubTitle movieListLength={films.length} />
+      <MovieList movies={films} />
+    </>
+  );
+  if (loading) {
+    return <h1>Loading</h1>;
+  }
+  return (
+    <React.Fragment>
+      <Nav>
+        <Filter filterMovies={filterByGenre} />
+        <Sort setSortParam={applySortParam} sortParam={sortParam} />
+      </Nav>
+      {films.length !== 0 ? movieListMakrUp() : <EmptyComponent />}
+    </React.Fragment>
+  );
+};
 
-    return (
-      <React.Fragment>
-        <Nav>
-          <Filter filterMovies={filterByGenre} />
-          <Sort setSortParam={applySortParam} />
-        </Nav>
-        {
-          foundMovies.length !== 0 ? movieListMakrUp() : <EmptyComponent />
-        }
-      </React.Fragment>
-    );
-}
+const mapStateToProps = (state) => {
+  return {
+    films: state.films,
+    loading: state.loading,
+    genre: state.genre,
+    sortParam: state.sortParam,
+  };
+};
+
+const mapDispatchToProps = {
+  fetchMovies: fetchMoviesActionCreator,
+  setFilter: setFilterActionCreator,
+  setSort: setSortActionCreator,
+};
+
+export const MovieListContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieListContainerTwo);

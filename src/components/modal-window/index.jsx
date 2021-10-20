@@ -135,16 +135,10 @@ const ModalWindowTemplate = ({ movie, fetchMovie, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    movie: state.movie,
-  };
-};
+const mapStateToProps = ({ movie }) => ({ movie });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchMovie: (movieId) => dispatch(fetchMovieByIdActionCreator(movieId)),
-  };
+const mapDispatchToProps = {
+  fetchMovie: fetchMovieByIdActionCreator,
 };
 
 export const ModalWindow = connect(

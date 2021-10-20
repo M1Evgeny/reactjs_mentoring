@@ -1,7 +1,4 @@
 import { movieGenre } from "../actions/filter-movies-action";
 
-export const setFilterActionCreator = (genre) => {
-  return function (dispatch) {
-    dispatch(movieGenre(genre));
-  };
-};
+export const setFilterActionCreator = (genre) => (dispatch) =>
+  dispatch(movieGenre(genre));

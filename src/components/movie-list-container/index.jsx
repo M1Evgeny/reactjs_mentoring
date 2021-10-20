@@ -18,7 +18,7 @@ const MovieListContainerTwo = ({
   genre,
   sortParam,
   setFilter,
-  setSort
+  setSort,
 }) => {
   const filterByGenre = (genre) => {
     setFilter(genre);
@@ -56,16 +56,13 @@ const mapStateToProps = (state) => {
     loading: state.loading,
     genre: state.genre,
     sortParam: state.sortParam,
-    state: state
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchMovies: () => dispatch(fetchMoviesActionCreator()),
-    setFilter: (genre) => dispatch(setFilterActionCreator(genre)),
-    setSort: (sortParam) => dispatch(setSortActionCreator(sortParam)),
-  };
+const mapDispatchToProps = {
+  fetchMovies: fetchMoviesActionCreator,
+  setFilter: setFilterActionCreator,
+  setSort: setSortActionCreator,
 };
 
 export const MovieListContainer = connect(

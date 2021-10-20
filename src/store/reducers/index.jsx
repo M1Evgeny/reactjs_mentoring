@@ -7,7 +7,20 @@ const initialState = {
   sortParam: "release_date",
   genre: "all",
   movieId: "",
-  movie: {},
+  movie: {
+    id: "",
+    title: "",
+    tagline: "",
+    vote_average: "",
+    vote_count: "",
+    release_date: "",
+    poster_path: "",
+    overview: "",
+    budget: "",
+    revenue: "",
+    genres: [],
+    runtime: ""
+  },
 };
 
 export const movieReducer = (state = initialState, action) => {

@@ -3,6 +3,7 @@ import {
   fetchMoviesRequest,
   fetchMoviesFailure,
 } from "../actions/fetchMoviesAction";
+import { constants } from "./constants";
 
 // actionCreator for async requests
 export const fetchMoviesActionCreator = () => {
@@ -16,7 +17,7 @@ export const fetchMoviesActionCreator = () => {
 };
 
 const getUrl = (getState) => {
-  const url = `http://localhost:4000/movies?sortBy=${
+  const url = `${constants.BASE_URL}/movies?sortBy=${
     getState().sortParam
   }&sortOrder=desc`;
   if (getState().genre !== "all") {

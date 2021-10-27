@@ -10,7 +10,7 @@ export const RootModal = () => {
   const handleModalClose = (e) => {
     const currentClass = e.target.className;
     if (currentClass === "modal-background" || currentClass === "close") {
-      setModalObject({ modalType: "" });
+      setTimeout(() => setModalObject({ modalType: "" }), 0);
     }
   };
 
@@ -29,7 +29,6 @@ export const RootModal = () => {
         <ModalWindow
           handleModalClose={handleModalClose}
           modalTitle={"EDIT MOVIE"}
-          id={modalObject.id}
         />
       );
     case "success-modal":

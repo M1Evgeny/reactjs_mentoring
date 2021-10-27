@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { setFilterActionCreator } from "../../store/actionCreators/filter-movies";
 import { setSortActionCreator } from "../../store/actionCreators/sort-movies";
 
-const MovieListContainerTwo = ({
+const MovieListContainerTemplate = ({
   films,
   fetchMovies,
   loading,
@@ -68,4 +68,4 @@ const mapDispatchToProps = {
 export const MovieListContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MovieListContainerTwo);
+)(MovieListContainerTemplate);

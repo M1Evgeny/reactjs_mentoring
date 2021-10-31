@@ -18,14 +18,12 @@ const DeleteModalTemplate = ({ fetchMovies, handleModalClose }) => {
         accept: "*/*",
       },
     })
-      .then(function (response) {
+      .then((response) => {
         if (response.status === 204) {
           setMovieId(0);
           fetchMovies();
           setModalObject({ modalType: "" });
-          return;
         }
-        response.json().then((data) => console.log(data));
       })
       .catch((err) => console.log("Fetch Error :-S", err));
 

@@ -21,15 +21,13 @@ const ModalWindowTemplate = ({ movie, fetchMovie, fetchMovies, ...props }) => {
       },
       body: data,
     })
-      .then(function (response) {
+      .then((response) => {
         setMovieId(0);
         fetchMovies();
         setModalObject({ modalType: "" });
         if (response.status === 201 && isAddModal) {
           setModalObject({ modalType: "success-modal" });
-          return;
         }
-        response.json().then((data) => console.log(data));
       })
       .catch((err) => console.log("Fetch Error :-S", err));
 
@@ -197,8 +195,7 @@ const ModalWindowTemplate = ({ movie, fetchMovie, fetchMovies, ...props }) => {
                   name="overview"
                   type="text"
                   placeholder="Movie description"
-                  {...formik.getFieldProps('overview')}
-                
+                  {...formik.getFieldProps("overview")}
                 />
                 {formik.touched.overview && formik.errors.overview ? (
                   <div>{formik.errors.overview}</div>

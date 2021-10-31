@@ -1,33 +1,83 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useModal } from "../context/modal-context";
 import "./ModalWindow.css";
 import { fetchMovieByIdActionCreator } from "../../store/actionCreators/fetchMovieById";
+import { fetchMoviesActionCreator } from "../../store/actionCreators/fetchMovies";
 import { connect } from "react-redux";
+import { useFormik } from "formik";
+import { constants } from "../../store/actionCreators/constants";
+import { useId } from "../context/id-context";
 
-const ModalWindowTemplate = ({ movie, fetchMovie, ...props }) => {
+const ModalWindowTemplate = ({ movie, fetchMovie, fetchMovies, ...props }) => {
   const { setModalObject } = useModal();
-  const [id, setId] = useState(props.id ? props.id : 0);
+  const { movieId, setMovieId } = useId();
+  const isAddModal = props.modalTitle === "ADD MOVIE";
 
-  //left this fields to avoid console errors, will be removed in next task
-  const [title, setTitle] = useState("");
-  const [releseDate, setReleseDate] = useState("");
-  const [movieUrl, setMovieUrl] = useState("");
-  const [rating, setRating] = useState("");
-  const [runtime, setRuntime] = useState("");
-  const [overview, setOverview] = useState("");
+  const sendMovie = (data) =>
+    fetch(`${constants.BASE_URL}/movies`, {
+      method: isAddModal ? "POST" : "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      body: data,
+    })
+      .then((response) => {
+        setMovieId(0);
+        fetchMovies();
+        setModalObject({ modalType: "" });
+        if (response.status === 201 && isAddModal) {
+          setModalObject({ modalType: "success-modal" });
+        }
+      })
+      .catch((err) => console.log("Fetch Error :-S", err));
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.title) {
+      errors.title = "Required";
+    }
+    if (!values.release_date) {
+      errors.release_date = "Required";
+    }
+    if (!values.poster_path) {
+      errors.poster_path = "Required";
+    }
+    if (!values.vote_average) {
+      errors.vote_average = "Required";
+    }
+    if (!values.runtime) {
+      errors.runtime = "Required";
+    }
+    if (!values.overview) {
+      errors.overview = "Required";
+    }
+    return errors;
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      title: isAddModal ? "" : movie.title,
+      release_date: isAddModal ? "" : movie.release_date,
+      poster_path: isAddModal ? "" : movie.poster_path,
+      vote_average: isAddModal ? "" : movie.vote_average,
+      runtime: isAddModal ? "" : movie.runtime,
+      overview: isAddModal ? "" : movie.overview,
+      genres: isAddModal ? ["Comedy", "Drama", "Romance"] : movie.genres,
+    },
+    validate,
+    onSubmit: (values) => {
+      if (!isAddModal) values.id = movie.id;
+      console.log(JSON.stringify(values, null, 2));
+      sendMovie(JSON.stringify(values, null, 2));
+    },
+  });
 
   useEffect(() => {
-    if (id !== 0) {
-      fetchMovie(id);
+    if (movieId !== 0) {
+      fetchMovie(movieId);
+      console.log(movie);
     }
-  }, [id]);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (props.modalTitle === "ADD MOVIE") {
-      setModalObject({ modalType: "success-modal" });
-    }
-  };
+  }, [movieId]);
 
   return (
     <>
@@ -43,49 +93,69 @@ const ModalWindowTemplate = ({ movie, fetchMovie, ...props }) => {
             </button>
           </div>
           <h1 className="modal-title">{props.modalTitle}</h1>
-          <form className="modal-form" onSubmit={handleSubmit}>
+          <form className="modal-form" onSubmit={formik.handleSubmit}>
             <fieldset className="modal-fieldset">
               <label className="modal-label">
                 Title
                 <input
-                  type="text"
+                  id="title"
                   name="title"
+                  type="text"
                   placeholder="Title"
-                  value={movie.title}
-                  onChange={setTitle}
+                  defaultValue={formik.values.title}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
+                {formik.touched.title && formik.errors.title ? (
+                  <div>{formik.errors.title}</div>
+                ) : null}
               </label>
               <label className="modal-label-second">
                 RELEASE DATE
                 <input
+                  id="release_date"
+                  name="release_date"
                   type="date"
-                  name="releseDate"
                   placeholder="yyyy-mm-dd"
-                  value={movie.relese_date}
-                  onChange={setReleseDate}
+                  defaultValue={formik.values.release_date}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
+                {formik.touched.release_date && formik.errors.release_date ? (
+                  <div>{formik.errors.release_date}</div>
+                ) : null}
               </label>
             </fieldset>
             <fieldset className="modal-fieldset">
               <label className="modal-label">
                 movie url
                 <input
+                  id="poster_path"
+                  name="poster_path"
                   type="url"
-                  name="movieUrl"
                   placeholder="https://"
-                  value={movie.poster_path}
-                  onChange={setMovieUrl}
+                  defaultValue={formik.values.poster_path}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
+                {formik.touched.poster_path && formik.errors.poster_path ? (
+                  <div>{formik.errors.poster_path}</div>
+                ) : null}
               </label>
               <label className="modal-label-second">
                 RATING
                 <input
+                  id="vote_average"
+                  name="vote_average"
                   type="number"
-                  name="rating"
                   placeholder="7.8"
-                  value={movie.vote_average}
-                  onChange={setRating}
+                  defaultValue={formik.values.vote_average}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
+                {formik.touched.vote_average && formik.errors.vote_average ? (
+                  <div>{formik.errors.vote_average}</div>
+                ) : null}
               </label>
             </fieldset>
             <fieldset className="modal-fieldset">
@@ -103,12 +173,17 @@ const ModalWindowTemplate = ({ movie, fetchMovie, ...props }) => {
               <label className="modal-label-second">
                 RUNTIME
                 <input
-                  type="number"
+                  id="runtime"
                   name="runtime"
+                  type="number"
                   placeholder="minutes"
-                  value={movie.runtime}
-                  onChange={setRuntime}
+                  defaultValue={formik.values.runtime}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
+                {formik.touched.runtime && formik.errors.runtime ? (
+                  <div>{formik.errors.runtime}</div>
+                ) : null}
               </label>
             </fieldset>
             <fieldset className="modal-fieldset">
@@ -116,17 +191,24 @@ const ModalWindowTemplate = ({ movie, fetchMovie, ...props }) => {
                 OVERVIEW
                 <textarea
                   className="overview-input"
-                  type="text"
+                  id="overview"
                   name="overview"
+                  type="text"
                   placeholder="Movie description"
-                  value={movie.overview}
-                  onChange={setOverview}
+                  {...formik.getFieldProps("overview")}
                 />
+                {formik.touched.overview && formik.errors.overview ? (
+                  <div>{formik.errors.overview}</div>
+                ) : null}
               </label>
             </fieldset>
             <p className="modal-buttons">
-              <input className="modal-reset" type="reset" value="reset" />
-              <input className="modal-submit" type="submit" value="submit" />
+              <button className="modal-reset" type="reset">
+                reset
+              </button>
+              <button className="modal-submit" type="submit">
+                submit
+              </button>
             </p>
           </form>
         </div>
@@ -139,6 +221,7 @@ const mapStateToProps = ({ movie }) => ({ movie });
 
 const mapDispatchToProps = {
   fetchMovie: fetchMovieByIdActionCreator,
+  fetchMovies: fetchMoviesActionCreator,
 };
 
 export const ModalWindow = connect(

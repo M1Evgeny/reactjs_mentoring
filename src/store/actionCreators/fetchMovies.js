@@ -6,22 +6,25 @@ import {
 import { constants } from "./constants";
 
 // actionCreator for async requests
-export const fetchMoviesActionCreator = () => {
-  return function (dispatch, getState) {
+export const fetchMoviesActionCreator = (genre, sortBy, searchText) => {
+  const mGenre = genre ? genre : "all";
+  const mSortBy = sortBy ? sortBy : "release_date";
+  const mSearchText = searchText ? searchText : "";
+  return function (dispatch) {
     dispatch(fetchMoviesRequest());
-    fetch(getUrl(getState))
+    fetch(getUrl(mGenre, mSortBy, mSearchText))
       .then((response) => response.json())
       .then((data) => dispatch(fetchFilmsSuccess(data.data)))
       .catch((error) => fetchMoviesFailure(error));
   };
 };
 
-const getUrl = (getState) => {
+const getUrl = (genre, sortBy, searchText) => {
   const url = `${constants.BASE_URL}/movies?sortBy=${
-    getState().sortParam
-  }&sortOrder=desc`;
-  if (getState().genre !== "all") {
-    return url.concat(`&filter=${getState().genre}`);
+    sortBy ? sortBy : "release_date"
+  }&sortOrder=desc&search=${searchText}&searchBy=title`;
+  if (genre !== "all") {
+    return url.concat(`&filter=${genre}`);
   }
   return url;
 };

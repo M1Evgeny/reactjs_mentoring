@@ -8,27 +8,19 @@ import { Filter } from "../filter";
 import { EmptyComponent } from "../empty-component";
 import { fetchMoviesActionCreator } from "../../store/actionCreators/fetchMovies";
 import { connect } from "react-redux";
-import { setFilterActionCreator } from "../../store/actionCreators/filter-movies";
-import { setSortActionCreator } from "../../store/actionCreators/sort-movies";
+import { useLocation, useParams } from "react-router-dom";
 
-const MovieListContainerTemplate = ({
-  films,
-  fetchMovies,
-  loading,
-  genre,
-  sortParam,
-  setFilter,
-  setSort,
-}) => {
-  const filterByGenre = (genre) => {
-    setFilter(genre);
-  };
+const MovieListContainerTemplate = ({ films, fetchMovies, loading }) => {
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const query = useQuery();
+  const genre = query.get("genre");
+  const sortBy = query.get("sortBy");
 
-  const applySortParam = (sortParam) => setSort(sortParam);
+  const searchQuery = useParams().searchQuery;
 
   useEffect(() => {
-    fetchMovies();
-  }, [genre, sortParam]);
+    fetchMovies(genre, sortBy, searchQuery);
+  }, [genre, sortBy]);
 
   const movieListMakrUp = () => (
     <>
@@ -42,8 +34,8 @@ const MovieListContainerTemplate = ({
   return (
     <React.Fragment>
       <Nav>
-        <Filter filterMovies={filterByGenre} />
-        <Sort setSortParam={applySortParam} sortParam={sortParam} />
+        <Filter />
+        <Sort />
       </Nav>
       {films.length !== 0 ? movieListMakrUp() : <EmptyComponent />}
     </React.Fragment>
@@ -54,15 +46,11 @@ const mapStateToProps = (state) => {
   return {
     films: state.films,
     loading: state.loading,
-    genre: state.genre,
-    sortParam: state.sortParam,
   };
 };
 
 const mapDispatchToProps = {
   fetchMovies: fetchMoviesActionCreator,
-  setFilter: setFilterActionCreator,
-  setSort: setSortActionCreator,
 };
 
 export const MovieListContainer = connect(

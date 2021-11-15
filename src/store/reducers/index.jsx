@@ -4,8 +4,6 @@ const initialState = {
   error: "",
   films: [],
   loading: false,
-  sortParam: "release_date",
-  genre: "all",
   movieId: "",
   movie: {
     id: "",

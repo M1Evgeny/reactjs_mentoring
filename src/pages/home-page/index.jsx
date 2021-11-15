@@ -9,15 +9,16 @@ import { Main } from "../../components/main";
 import { RootModal } from "../../components/root-modal";
 import { MovieListContainer } from "../../components/movie-list-container";
 import { Footer } from "../../components/footer";
-import { useId } from "../../components/context/id-context";
+import { useLocation } from "react-router-dom";
 
 export const HomePage = () => {
-  const { movieId } = useId();
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const movieId = useQuery().get("movieId");
 
   return (
     <>
-      {movieId !== 0 ? (
-        <FullMovieCard movie={movieId} />
+      {movieId ? (
+        <FullMovieCard movieId={movieId} />
       ) : (
         <Header>
           <Container>

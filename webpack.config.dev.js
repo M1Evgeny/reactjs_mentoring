@@ -7,6 +7,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "bundle.js",
+    publicPath: "/",
     clean: true
   },
   resolve: {
@@ -17,7 +18,8 @@ module.exports = {
   devServer: {
     static: path.join(__dirname, "/dist"),
     port: 3000,
-    open: true
+    open: true,
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -13,12 +13,11 @@ import { useLocation } from "react-router-dom";
 
 export const HomePage = () => {
   const useQuery = () => new URLSearchParams(useLocation().search);
-  const id = useQuery().get("movieId");
-  const movieId = id ? id : 0;
+  const movieId = useQuery().get("movieId");
 
   return (
     <>
-      {movieId !== 0 ? (
+      {movieId ? (
         <FullMovieCard movieId={movieId} />
       ) : (
         <Header>

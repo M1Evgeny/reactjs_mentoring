@@ -9,13 +9,13 @@ export const Sort = () => {
   const useQuery = () => new URLSearchParams(location.search);
   const sortBy = useQuery().get("sortBy");
 
-  function handleChange(value) {
+  const handleChange = (value) => {
     if (location.search) {
       history.push(`/search${location.search}&sortBy=${value}`);
       return;
     }
     history.push(`/search?sortBy=${value}`);
-  }
+  };
   return (
     <div className="sort">
       <label className="sortBy">

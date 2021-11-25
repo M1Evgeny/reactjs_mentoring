@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve",
     "build": "cross-env NODE_ENV=production webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --env=jsdom",
+    "test:watch": "npm test -- --watch",
+    "test:cover": "npm test -- --coverage",
+    "cypress": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -23,19 +26,30 @@
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
+    "@testing-library/dom": "^8.11.1",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
     "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.13.2",
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.2.0",
     "css-minimizer-webpack-plugin": "^3.0.2",
+    "enzyme": "^3.11.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.3.1",
+    "jest-environment-jsdom": "^27.3.1",
     "react-hot-loader": "^4.13.0",
+    "redux-mock-store": "^1.5.4",
     "style-loader": "^3.2.1",
     "webpack": "^5.52.1",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.2.1"
   },
   "dependencies": {
+    "cypress": "^9.1.0",
     "dotenv": "^10.0.0",
     "formik": "^2.2.9",
     "html-webpack-plugin": "^5.3.2",
@@ -50,5 +64,17 @@
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/cypress/"
+    ],
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "testEnvironment": "jsdom"
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { ErrorBoundary } from "./ErrorBoundary";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { HomePage } from "./pages/home-page";
 import { PageNotFound } from "./pages/404";
 import { IdProvider } from "./components/context/id-context";

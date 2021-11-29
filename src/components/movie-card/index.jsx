@@ -24,7 +24,7 @@ export const MovieCard = (props) => {
   };
 
   return (
-    <article className={styles.filmCard} key={props.id} onClick={handleChange}>
+    <article className={`${styles.filmCard} movie-card`} key={props.id} onClick={handleChange}>
       <div className={styles.hamburger_menu}>
         <input
           id={`menu__toggle${props.id}`}
@@ -59,7 +59,7 @@ export const MovieCard = (props) => {
       </div>
       <img src={props.poster_path} className={styles.card_img_top} alt="..." />
       <div className={styles.card_body}>
-        <span className={styles.filmTitle}>{props.title}</span>
+        <span className={`${styles.filmTitle} movie-card-title`}>{props.title}</span>
         <span className={styles.filmYear}>{props.release_date}</span>
         {props.genres.length > 0 && (
           <p className="card-text">{props.genres.join(", ")}</p>

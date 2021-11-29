@@ -33,7 +33,7 @@ const SearchTemplate = ({ fetchMovies }) => {
           className="searchField"
           type="text"
           placeholder="What do you want to watch?"
-          defaultValue={formik.values.title}
+          //defaultValue={formik.values.title}
           value={formik.values.title}
           onChange={formik.handleChange}
         />

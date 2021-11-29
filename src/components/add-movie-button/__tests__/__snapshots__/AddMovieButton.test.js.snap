@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current render 1`] = `
+<body>
+  <div>
+    <div>
+      <button
+        class="addMovie"
+        type="button"
+      >
+        + add movie
+      </button>
+    </div>
+  </div>
+</body>
+`;

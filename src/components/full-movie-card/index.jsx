@@ -30,14 +30,14 @@ function FullMovieCardTemplate({ movie, fetchMovie, ...props }) {
           />
           <section className={styles.section}>
             <p>
-              <span className={styles.movie_title}>{movie.title}</span>
-              <span className={styles.movie_rating}>{movie.vote_average}</span>
+              <span className={`${styles.movie_title} fullmovie-card-title`}>{movie.title}</span>
+              <span className={`${styles.movie_rating} fullmovie-card-movie_rating`}>{movie.vote_average}</span>
             </p>
             {movie.genres !== undefined && movie.genres.length > 0 && (
-              <p className={styles.genre_list}>{movie.genres.join(", ")}</p>
+              <p className={`${styles.genre_list} fullmovie-card-genre_list`}>{movie.genres.join(", ")}</p>
             )}
             <p>
-              <span className={styles.release_date}>
+              <span className={`${styles.release_date} fullmovie-card-release_date`}>
                 {new Date(movie.release_date).getFullYear()}
               </span>
               <span className={styles.release_date}>
@@ -46,7 +46,7 @@ function FullMovieCardTemplate({ movie, fetchMovie, ...props }) {
                 min
               </span>
             </p>
-            <p className={styles.movie_overview}>{movie.overview}</p>
+            <p className={`${styles.movie_overview} fullmovie-card-movie_overview`}>{movie.overview}</p>
           </section>
         </article>
       </header>

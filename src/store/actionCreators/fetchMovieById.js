@@ -1,6 +1,6 @@
 import { fetchMovieSuccess } from "../actions/fetchMovieByIdAction";
 import { constants } from "./constants";
-//import fetch from "isomorphic-fetch";
+import fetch from "isomorphic-fetch";
 
 export const fetchMovieByIdActionCreator = (movieId) => {
   return function (dispatch) {

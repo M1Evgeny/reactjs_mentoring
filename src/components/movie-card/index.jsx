@@ -31,40 +31,49 @@ export const MovieCard = (props) => {
           className={styles.menu__toggle}
           type="checkbox"
         />
-        <label className={styles.menu__btn} htmlFor={`menu__toggle${props.id}`}>
-          <span></span>
-        </label>
-        <ul className={styles.menu__box}>
-          <li>
-            <div
-              id="edit-button"
-              className={styles.menu__item}
-              href="#"
-              onClick={(e) => handleModalOpen(e)}
-            >
-              Edit
-            </div>
-          </li>
-          <li>
-            <div
-              id="delete-button"
-              className={styles.menu__item}
-              href="#"
-              onClick={(e) => handleModalOpen(e)}
-            >
-              Delete
-            </div>
-          </li>
-        </ul>
-      </div>
-      <img src={props.poster_path} className={styles.card_img_top} alt="..." />
-      <div className={styles.card_body}>
-        <span className={`${styles.filmTitle} movie-card-title`}>{props.title}</span>
-        <span className={styles.filmYear}>{props.release_date}</span>
-        {props.genres.length > 0 && (
-          <p className="card-text">{props.genres.join(", ")}</p>
-        )}
-      </div>
+          <label
+            className={styles.menu__btn}
+            htmlFor={`menu__toggle${props.id}`}
+          >
+            <span></span>
+          </label>
+          <ul className={styles.menu__box}>
+            <li>
+              <div
+                id="edit-button"
+                className={styles.menu__item}
+                href="#"
+                onClick={(e) => handleModalOpen(e)}
+              >
+                Edit
+              </div>
+            </li>
+            <li>
+              <div
+                id="delete-button"
+                className={styles.menu__item}
+                href="#"
+                onClick={(e) => handleModalOpen(e)}
+              >
+                Delete
+              </div>
+            </li>
+          </ul>
+        </div>
+        <img
+          src={props.poster_path}
+          className={styles.card_img_top}
+          alt={`${props.title} alt image`}
+        />
+        <div className={styles.card_body}>
+          <span className={`${styles.filmTitle} movie-card-title`}>
+            {props.title}
+          </span>
+          <span className={styles.filmYear}>{props.release_date}</span>
+          {props.genres.length > 0 && (
+            <p className="card-text">{props.genres.join(", ")}</p>
+          )}
+        </div>
     </article>
   );
 };

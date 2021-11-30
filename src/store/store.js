@@ -7,3 +7,12 @@ export const store = createStore(
   movieReducer,
   composeWithDevTools(applyMiddleware(thunkMiddleware))
 );
+
+export const configureStore = (prevState) => {
+  const store = createStore(
+    movieReducer,
+    prevState,
+    composeWithDevTools(applyMiddleware(thunkMiddleware))
+  );
+  return store;
+};

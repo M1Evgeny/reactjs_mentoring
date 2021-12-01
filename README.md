@@ -10,9 +10,21 @@
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run dev`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000/](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.
 
 ### `npm run build`
+
+Builds the app for production to the `dist` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+### `npm run build:server`
+
+Builds server side part for production to the `dist/server` folder.
 
 ### `npm run test`
 
@@ -26,4 +38,6 @@ Runs tests, shows the percentage of coverage, and creates a "coverage" folder wi
 
 Run cypress for make E2E tests.
 
-Builds the app for production to the `dist` folder.
+## SSR
+
+Before starting the server, you need to run `npm run build` and `npm run build:server`. Then run `npm run server`.

@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve",
     "build": "cross-env NODE_ENV=production webpack",
+    "build:server": "webpack --config webpack.config.server.js",
+    "server": "node ./server",
     "test": "jest --env=jsdom",
     "test:watch": "npm test -- --watch",
     "test:cover": "npm test -- --coverage",
@@ -46,13 +48,19 @@
     "style-loader": "^3.2.1",
     "webpack": "^5.52.1",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.2.1"
+    "webpack-dev-middleware": "^5.2.2",
+    "webpack-dev-server": "^4.2.1",
+    "webpack-hot-middleware": "^2.25.1",
+    "webpack-hot-server-middleware": "^0.6.1",
+    "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
     "cypress": "^9.1.0",
     "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "formik": "^2.2.9",
     "html-webpack-plugin": "^5.3.2",
+    "isomorphic-fetch": "^3.0.0",
     "mini-css-extract-plugin": "^2.3.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "prop-types": "^15.7.2",

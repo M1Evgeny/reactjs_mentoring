@@ -4,6 +4,7 @@ import {
   fetchMoviesFailure,
 } from "../actions/fetchMoviesAction";
 import { constants } from "./constants";
+import fetch from "isomorphic-fetch";
 
 // actionCreator for async requests
 export const fetchMoviesActionCreator = (genre, sortBy, searchText) => {
@@ -12,7 +13,7 @@ export const fetchMoviesActionCreator = (genre, sortBy, searchText) => {
   const mSearchText = searchText ? searchText : "";
   return function (dispatch) {
     dispatch(fetchMoviesRequest());
-    fetch(getUrl(mGenre, mSortBy, mSearchText))
+    return fetch(getUrl(mGenre, mSortBy, mSearchText))
       .then((response) => response.json())
       .then((data) => dispatch(fetchFilmsSuccess(data.data)))
       .catch((error) => fetchMoviesFailure(error));
